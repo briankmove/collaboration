@@ -1,0 +1,24 @@
+{
+  "endPoints": {
+    "rentalApi": {
+      "url": "http://api.rentals.move.com/v2",
+      "timeout": 2000
+    },
+    "propertyApi": {
+      "url": "http://api.move.com/v3",
+      "timeout": 3000
+    },
+    "freeTextParser": {
+      "url": "http://freetextparser.move.com/v1",
+      "timeout": 1000
+    },
+    "mprId": {
+      "url": "http://api.mpridentifier.move.com/v2",
+      "timeout": 1000
+    }
+  },
+  "requestModuleName": "request",
+  "clientId": "mobile",
+  "env": "dev",
+  "timeout": 3000
+}

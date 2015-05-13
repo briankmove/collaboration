@@ -1,0 +1,40 @@
+{
+  "name": "collaboration-api",
+  "version": "0.0.1",
+  "description": "Collaboration API",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Move Inc. Mobile Team",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "boom": "^2.7.1",
+    "good": "^6.1.2",
+    "good-console": "^5.0.0",
+    "hapi": "^8.4.0",
+    "hapi-swagger": "^0.7.3",
+    "joi": "^6.4.1",
+    "lodash": "^3.7.0",
+    "lout": "^6.2.2",
+    "newrelic": "^1.18.5",
+    "request": "^2.55.0",
+    "swagger-ui": "^2.1.1-M2",
+    "tv": "^4.1.0",
+    "mysql": "^2.6.2",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-expect-file": "0.0.7",
+    "gulp-jshint": "^1.10.0",
+    "gulp-exit": "0.0.2",
+    "gulp-mocha": "^2.0.1",
+    "gulp-nodemon": "^2.0.2",
+    "gulp-istanbul": "^0.8.1",
+    "gulp-develop-server": "^0.4.2",
+    "jshint-stylish": "^1.0.1",
+    "mocha": "^2.2.4",
+    "node-notifier": "^4.2.1"
+  }
+}
