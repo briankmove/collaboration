@@ -8,17 +8,25 @@
       "url": "http://api.move.com/v3",
       "timeout": 3000
     },
-    "freeTextParser": {
-      "url": "http://freetextparser.move.com/v1",
-      "timeout": 1000
+    "socialBiosApi": {
+      "url": "https://api.socialbios.com/v1.4",
+      "key": "E6ojy7JFpRze9F7BP24bEVcPYoCtqPjHAQ",
+      "timeout": 2000
     },
-    "mprId": {
+    "mprIdApi": {
       "url": "http://api.mpridentifier.move.com/v2",
       "timeout": 1000
     }
   },
-  "requestModuleName": "request",
-  "clientId": "mobile",
+  "plugins": {
+    "swagger": true,
+    "tv": false,
+    "good": false,
+    "properties": true,
+    "agents": true,
+    "collaboration": true
+  },
+  "clientId": "mapi",
   "env": "dev",
   "timeout": 3000
 }
