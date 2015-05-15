@@ -41,7 +41,6 @@ var Feeds = function(options) {
         return new Promise(function (resolve, reject) {
             request.payload.feedId = Uuid.v4();
             request.payload.userId = request.params.userId;
-            request.payload.userId = request.params.userId;
 
             client.setFeed(request.payload, resolve, reject);
         });
@@ -50,7 +49,7 @@ var Feeds = function(options) {
     /**
      * Get feed information
      *
-     * @method setFeed
+     * @method getFeedByFeedId
      * @param {object} params
      * @return {promise}
      */
@@ -63,7 +62,7 @@ var Feeds = function(options) {
     /**
      * Removes a feed information
      *
-     * @method setFeed
+     * @method removeFeed
      * @param {object} params
      * @return {promise}
      */
@@ -78,7 +77,7 @@ var Feeds = function(options) {
     /**
      * Creates a post information
      *
-     * @method setFeed
+     * @method setPost
      * @param {object} params
      * @return {promise}
      */
@@ -141,7 +140,7 @@ var Feeds = function(options) {
 
     self.setUser = function setUser (request) {
         return new Promise(function (resolve, reject) {
-            request.payload.grantUserId = request.params.userId;
+            request.payload.userId = request.params.userId;
             request.payload.feedId = request.params.feedId;
             client.setUser(request.payload, resolve, reject);
         });

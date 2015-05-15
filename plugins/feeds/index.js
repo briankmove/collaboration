@@ -18,23 +18,36 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Retrieve feed list by their member id'
             }
         },
         {
             path: '/v1/users/{userId}/feeds/',
             method: 'POST',
             handler: function(request, reply) {
-                console.log(request.payload);
                 feeds
                     .setFeed(request)
                     .catch(feeds.error)
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id')
+                    },
+                    payload: {
+                        propertyId: joi.number().positive().required().description('Property id'),
+                        roleId: joi.any().valid('O', 'F').required().description('Role id')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Creates a feed per a member id'
             }
         },
         {
@@ -47,8 +60,14 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Retrieve a feed information by a given feed id and a member id'
             }
         },
         {
@@ -61,8 +80,14 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Remove a feed by a given feed id and a member id'
             }
         },
         {
@@ -75,8 +100,18 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)')
+                    },
+                    query: {
+                        offset: joi.number().min(0).required().description('offset'),
+                        limit: joi.number().positive().required().description('limit'),
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Retrieve post list by a given feed id and a member id'
             }
         },
         {
@@ -89,8 +124,17 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)')
+                    },
+                    payload: {
+                        comment: joi.string().required().description('Post comment')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Creates a post with a given member id and feed id'
             }
         },
         {
@@ -103,8 +147,15 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)'),
+                        postId: joi.string().guid().required().description('post id (uuid)')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Retrieve a post by a post id'
             }
         },
         {
@@ -117,8 +168,15 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)'),
+                        postId: joi.string().guid().required().description('post id (uuid)')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Update a post by a post id'
             }
         },
         {
@@ -131,8 +189,15 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)'),
+                        postId: joi.string().guid().required().description('post id (uuid)')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Delete a post by a post id'
             }
         },
         {
@@ -145,8 +210,14 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Retrieve members and role information'
             }
         },
         {
@@ -159,12 +230,22 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id : Owner of feed'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)')
+                    },
+                    payload: {
+                        memberId: joi.string().required().description('RDC user id'),
+                        roleId: joi.string().max(1).required().description('Role id')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Grant a role to a member'
             }
         },
         {
-            path: '/v1/users/{grantUserId}/feeds/{feedId}/members/{userId}',
+            path: '/v1/users/{userId}/feeds/{feedId}/members/{memberId}',
             method: 'GET',
             handler: function(request, reply) {
                 feeds
@@ -173,12 +254,19 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id : Owner of feed'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)'),
+                        memberId: joi.string().required().description('RDC user id : grant user')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Retrieve member information by a user id'
             }
         },
         {
-            path: '/v1/users/{grantUserId}/feeds/{feedId}/members/{userId}',
+            path: '/v1/users/{userId}/feeds/{feedId}/members/{memberId}',
             method: 'PUT',
             handler: function(request, reply) {
                 feeds
@@ -187,12 +275,22 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id : Owner of feed'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)'),
+                        memberId: joi.string().required().description('RDC user id : grant user')
+                    },
+                    payload: {
+                        roleId: joi.string().max(1).required().description('Role id')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Update a user role by user id'
             }
         },
         {
-            path: '/v1/users/{grantUserId}/feeds/{feedId}/members/{userId}',
+            path: '/v1/users/{userId}/feeds/{feedId}/members/{memberId}',
             method: 'DELETE',
             handler: function(request, reply) {
                 feeds
@@ -201,8 +299,15 @@ exports.register = function(plugin, options, next) {
                     .then(reply);
             },
             config: {
+                validate: {
+                    params: {
+                        userId: joi.string().required().description('RDC user id : Owner of feed'),
+                        feedId: joi.string().guid().required().description('feed id (uuid)'),
+                        memberId: joi.string().required().description('RDC user id : grant user')
+                    }
+                },
                 tags: ['api'],
-                description: 'Feeds'
+                description: 'Revoke a role from a user'
             }
         }
     ]);
